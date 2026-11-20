@@ -1,4 +1,3 @@
-
 services:
   rabbitmq:
     image: rabbitmq:4-management
@@ -11,13 +10,17 @@ services:
       - "${RABBITMQ_MANAGEMENT_PORT}:15672"
 
     environment:
-      RABBITMQ_DEFAULT_USER: ${RABBITMQ_DEFAULT_USER}
-      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_DEFAULT_PASS}
+      RABBITMQ_USER: ${RABBITMQ_DEFAULT_USER}
+      RABBITMQ_PASSWORD: ${RABBITMQ_DEFAULT_PASS}
+
+    entrypoint: ["/usr/local/bin/entrypoint.sh"]
 
     volumes:
       - rabbitmq_data:/var/lib/rabbitmq
       - ./rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf:ro
-      - ./definitions/definitions.json:/etc/rabbitmq/definitions.json:ro
+      - ./definitions:/etc/rabbitmq/definitions
+      - ./definitions/definitions.json.template:/templates/definitions.json.template:ro
+      - ./entrypoint.sh:/usr/local/bin/entrypoint.sh:ro
 
     healthcheck:
       test: ["CMD", "rabbitmq-diagnostics", "-q", "ping"]
