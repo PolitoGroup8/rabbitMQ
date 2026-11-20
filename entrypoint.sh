@@ -1,5 +1,5 @@
 #!/bin/sh
-set -eu
+set -e
 
 : "${RABBITMQ_USER:?RABBITMQ_USER non impostata}"
 : "${RABBITMQ_PASSWORD:?RABBITMQ_PASSWORD non impostata}"
@@ -12,7 +12,7 @@ mkdir -p "$OUT_DIR"
 
 # Se sull'host era rimasta una directory vuota chiamata definitions.json, avvisa chiaramente
 if [ -d "$OUT_FILE" ]; then
-  echo "ERRORE: $OUT_FILE è una directory. Rimuovila sull'host e riavvia." >&2
+  echo "ERRORE: $OUT_FILE ?? una directory. Rimuovila sull'host e riavvia." >&2
   exit 1
 fi
 
