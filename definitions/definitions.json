@@ -1,0 +1,32 @@
+{
+  "exchanges": [
+    {
+      "name": "payments-events",
+      "vhost": "/",
+      "type": "direct",
+      "durable": true,
+      "auto_delete": false,
+      "internal": false,
+      "arguments": {}
+    }
+  ],
+  "queues": [
+    {
+      "name": "sales.payments-events",
+      "vhost": "/",
+      "durable": true,
+      "auto_delete": false,
+      "arguments": {}
+    }
+  ],
+  "bindings": [
+    {
+      "source": "payments-events",
+      "vhost": "/",
+      "destination": "sales.payments-events",
+      "destination_type": "queue",
+      "routing_key": "payment.created",
+      "arguments": {}
+    }
+  ]
+}
