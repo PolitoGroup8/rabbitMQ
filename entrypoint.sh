@@ -10,7 +10,6 @@ TEMPLATE_FILE="/templates/definitions.json.template"
 
 mkdir -p "$OUT_DIR"
 
-# Se sull'host era rimasta una directory vuota chiamata definitions.json, avvisa chiaramente
 if [ -d "$OUT_FILE" ]; then
   echo "ERRORE: $OUT_FILE ?? una directory. Rimuovila sull'host e riavvia." >&2
   exit 1
