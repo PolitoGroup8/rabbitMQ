@@ -4,7 +4,7 @@ setlocal
 if /i "%~1"=="local" goto deploy
 if /i "%~1"=="down" goto shutdown
 
-echo Usage: deploy.bat [local^|down]
+echo Usage: deploy.bat [local|down]
 exit /b 1
 
 :deploy
