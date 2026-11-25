@@ -18,9 +18,18 @@
       "read": ".*"
     }
   ],
-  "exchanges": [
+    "exchanges": [
     {
       "name": "payments-events",
+      "vhost": "/",
+      "type": "direct",
+      "durable": true,
+      "auto_delete": false,
+      "internal": false,
+      "arguments": {}
+    },
+    {
+      "name": "orders-events",
       "vhost": "/",
       "type": "direct",
       "durable": true,
@@ -36,6 +45,13 @@
       "durable": true,
       "auto_delete": false,
       "arguments": {}
+    },
+    {
+      "name": "tickets.order-paid",
+      "vhost": "/",
+      "durable": true,
+      "auto_delete": false,
+      "arguments": {}
     }
   ],
   "bindings": [
@@ -45,6 +61,14 @@
       "destination": "sales.payments-events",
       "destination_type": "queue",
       "routing_key": "#",
+      "arguments": {}
+    },
+    {
+      "source": "orders-events",
+      "vhost": "/",
+      "destination": "tickets.order-paid",
+      "destination_type": "queue",
+      "routing_key": "order.paid",
       "arguments": {}
     }
   ]
